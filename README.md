@@ -1,5 +1,6 @@
 # bloodhound-community-queries
 A repo with updated queries for the new BloodHound Community edition
+<br>
 Some of the queries are based on the https://hausec.com/2019/09/09/bloodhound-cypher-cheatsheet/, hence the reused names.
 
 # Cipher queries
