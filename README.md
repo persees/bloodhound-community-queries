@@ -5,7 +5,7 @@ Some of the queries are based on the https://hausec.com/2019/09/09/bloodhound-cy
 # Cipher queries
 ## Find All edges any owned user has on a computer
 ```cipher
-MATCH p=shortestPath((m:User)-[r]->(b:Computer))
-WHERE coalesce(m.system_tags, '') contains 'owned'
+MATCH p=shortestPath((u:User)-[r]->(c:Computer))
+WHERE coalesce(u.system_tags, '') contains 'owned'
 return p
 ```
