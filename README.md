@@ -5,7 +5,7 @@ A repo with updated queries for the new BloodHound Community edition.
 - Some of the queries are based on the https://hausec.com/2019/09/09/bloodhound-cypher-cheatsheet/, hence the reused names.
 
 # Cipher queries
-## :arrow_right: Find All edges any owned user has on a computer
+## :orange_circle: Find All edges any owned user has on a computer
 ```cipher
 MATCH p=shortestPath((u:User)-[r]->(c:Computer))
 WHERE coalesce(u.system_tags, '') contains 'owned'
