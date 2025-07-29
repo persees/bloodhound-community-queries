@@ -25,3 +25,13 @@ match p=(g:Group)-[:CanRDP|AdminTo|memberOf*1..]->(c:Computer) where g.objectid 
 and c.operatingsystem CONTAINS 'Server'
 return p
 ```
+
+## Shortest paths to Domain Admins
+- Normally the default query of "Shortests path to Domain Admins" already include all these queries in one. However, for organizations that have a big Active Directory environment, you may want to enumerate smaller paths to domain, computers first, then users, OUs, etc
+### Shortest paths to Domain Admins from Computers
+```
+MATCH p=shortestPath((s:Computer)-[:Owns|GenericAll|GenericWrite|WriteOwner|WriteDacl|MemberOf|ForceChangePassword|AllExtendedRights|AddMember|HasSession|AllowedToDelegate|CoerceToTGT|AllowedToAct|AdminTo|CanPSRemote|CanRDP|ExecuteDCOM|HasSIDHistory|AddSelf|DCSync|ReadLAPSPassword|ReadGMSAPassword|DumpSMSAPassword|SQLAdmin|AddAllowedToAct|WriteSPN|AddKeyCredentialLink|SyncLAPSPassword|WriteAccountRestrictions|WriteGPLink|GoldenCert|ADCSESC1|ADCSESC3|ADCSESC4|ADCSESC6a|ADCSESC6b|ADCSESC9a|ADCSESC9b|ADCSESC10a|ADCSESC10b|ADCSESC13|SyncedToEntraUser|CoerceAndRelayNTLMToSMB|CoerceAndRelayNTLMToADCS|WriteOwnerLimitedRights|OwnsLimitedRights|CoerceAndRelayNTLMToLDAP|CoerceAndRelayNTLMToLDAPS|ContainsIdentity|PropagatesACEsTo|GPOAppliesTo|CanApplyGPO|HasTrustKeys|DCFor|SameForestTrust|SpoofSIDHistory|AbuseTGTDelegation*1..]->(t:Group))
+WHERE t.objectid ENDS WITH '-512'
+RETURN p
+LIMIT 1000
+```
