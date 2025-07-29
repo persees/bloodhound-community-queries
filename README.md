@@ -57,3 +57,11 @@ match (c:Computer)
 where c.unconstraineddelegation = true
 return c
 ```
+
+## :green_circle: Find Constrained delegation computers/users
+```
+match (n)
+where (n:Computer or n:User) and
+n.trustedtoauth = true
+return n
+```
