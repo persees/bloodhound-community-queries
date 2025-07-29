@@ -51,4 +51,9 @@ RETURN p
 LIMIT 1000
 ```
 
-## :green_circle: Test
+## :green_circle: Find Unconstrained delegation computers
+```
+match (c:Computer)
+where c.unconstraineddelegation = true
+return c
+```
