@@ -12,9 +12,16 @@ WHERE coalesce(u.system_tags, '') contains 'owned'
 return p
 ```
 
-## Domain Users that can RDP to a machine
+## Domain Users that can RDP to a workstation
 ```
 match p=(g:Group)-[:CanRDP|AdminTo|memberOf*1..]->(c:Computer) where g.objectid ENDS WITH '-513'
 AND NOT c.operatingsystem CONTAINS 'Server'
+return p
+```
+
+## Domain Users that can RDP to a server
+```
+match p=(g:Group)-[:CanRDP|AdminTo|memberOf*1..]->(c:Computer) where g.objectid ENDS WITH '-513'
+and c.operatingsystem CONTAINS 'Server'
 return p
 ```
