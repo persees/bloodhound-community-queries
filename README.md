@@ -5,28 +5,28 @@ A repo with updated queries for the new BloodHound Community edition.
 - Some of the queries are based on the https://hausec.com/2019/09/09/bloodhound-cypher-cheatsheet/, hence the reused names.
 
 # Cipher queries
-## Find All edges any owned user has on a computer
+## :arrow_right: Find All edges any owned user has on a computer
 ```cipher
 MATCH p=shortestPath((u:User)-[r]->(c:Computer))
 WHERE coalesce(u.system_tags, '') contains 'owned'
 return p
 ```
 
-## Domain Users that can RDP to a workstation
+## :arrow_right: Domain Users that can RDP to a workstation
 ```
 match p=(g:Group)-[:CanRDP|AdminTo|memberOf*1..]->(c:Computer) where g.objectid ENDS WITH '-513'
 AND NOT c.operatingsystem CONTAINS 'Server'
 return p
 ```
 
-## Domain Users that can RDP to a server
+## :arrow_right: Domain Users that can RDP to a server
 ```
 match p=(g:Group)-[:CanRDP|AdminTo|memberOf*1..]->(c:Computer) where g.objectid ENDS WITH '-513'
 and c.operatingsystem CONTAINS 'Server'
 return p
 ```
 
-## Shortest paths to Domain Admins
+## :arrow_right: Shortest paths to Domain Admins
 - Normally the default query of "Shortests path to Domain Admins" already include all these queries in one. However, for organizations that have a big Active Directory environment, you may want to enumerate smaller paths to domain, computers first, then users, OUs, etc
 ### Shortest paths to Domain Admins from Computers
 ```
@@ -49,3 +49,5 @@ WHERE g.objectid ENDS WITH '-512' and t<>g
 RETURN p
 LIMIT 1000
 ```
+
+## :arrow_right: Test
